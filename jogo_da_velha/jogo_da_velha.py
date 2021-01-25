@@ -14,6 +14,7 @@ def desenhar_tabuleiro(tabueiro):
 
 # Função: reponsável por verificar linhas, colunas, diagonal principal e  diagonal secundária
 # em busca de um ganhador
+
 def verificando_ganhador(tabuleiro):
 
     diagonal_p_x = 0
@@ -72,8 +73,9 @@ def main():
     desenhar_tabuleiro(tabuleiro)
     qtd_jogadas = 0
     jogador = '1 [X]'
+    sinalizador = 0
     while True:
-        if qtd_jogadas == 0:
+        if qtd_jogadas == 0 and sinalizador != -1:
             menu()
             opcao = input('Entre com um opção: ')
             if opcao.lower() == 's':
@@ -85,6 +87,7 @@ def main():
         y = int(y)
 
         if jogador == '1 [X]':
+            sinalizador = -1;
             if x < 0 or x >= 3 or y < 0 or y >= 3:
                 continue
             if tabuleiro[x][y] == 'X' or tabuleiro[x][y] == 'O':
@@ -93,6 +96,7 @@ def main():
             desenhar_tabuleiro(tabuleiro)
         # jogador 2
         else:
+            sinalizador = -1
             if x < 0 or x >= 3 or y < 0 or y >= 3:
                 continue
             if tabuleiro[x][y] == 'X' or tabuleiro[x][y] == 'O':

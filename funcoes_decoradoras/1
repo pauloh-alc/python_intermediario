@@ -1,0 +1,35 @@
+from time import time
+from time import sleep
+
+# Função: decoradora
+def velocidade(funcao):
+    lista = []
+    def interna(*args, **kwargs):
+        start_time = time()
+        resultado = funcao(*args, **kwargs)
+        end_time   = time()
+        tempo = (end_time - start_time) * 1000 
+        print(f'A função {funcao.__name__} levou {tempo}ms para executar.')
+        lista.append(tempo)
+        return resultado
+
+    return interna, lista
+
+
+
+@velocidade # <--- decorador, estou decorando demora()
+def demora_On():
+    for i in range(10):
+        pass   
+        
+t1 = demora_On() # chamando funcao decorada
+print(t1[0])
+
+@velocidade
+def demora_On_n():
+    for i in range(10):
+        for j in range(10):
+            pass
+
+demora_On_n()
+
